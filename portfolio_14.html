@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUZY // Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cyan:#00ffe1;--magenta:#ff00a0;--purple:#9b00ff;--red:#ff2244;--bg:#07070f;--bg2:#0d0d1a;--bg3:#111128;--text:#d4d4e8;--muted:#5a5a7a;--border:rgba(0,255,225,0.15);}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:17px;line-height:1.7;overflow-x:hidden;cursor:crosshair;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);pointer-events:none;z-index:9999;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(7,7,15,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Share Tech Mono',monospace;font-size:.9rem;color:var(--cyan);letter-spacing:.2em;text-decoration:none;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s,text-shadow .3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan);text-shadow:0 0 12px var(--cyan);}
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,225,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,225,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,rgba(0,0,0,1) 20%,rgba(0,0,0,0) 75%);}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb-1{width:500px;height:500px;background:rgba(155,0,255,.12);top:-100px;left:-100px;}
+.orb-2{width:400px;height:400px;background:rgba(255,0,160,.1);bottom:-80px;right:-60px;}
+.orb-3{width:300px;height:300px;background:rgba(0,255,225,.07);top:50%;left:50%;transform:translate(-50%,-50%);}
+.hero-eyebrow{font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.4em;color:var(--cyan);text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeSlideDown .8s .3s forwards;}
+.hero-name{font-family:'Cinzel Decorative',serif;font-size:clamp(3.5rem,10vw,8rem);font-weight:700;line-height:1;letter-spacing:.06em;color:#fff;position:relative;opacity:0;animation:fadeSlideDown .8s .5s forwards;}
+.glitch{position:relative;display:inline-block;animation:glitch 4s infinite;}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;}
+.glitch::before{color:var(--magenta);clip-path:polygon(0 30%,100% 30%,100% 50%,0 50%);animation:glitch-b 4s infinite;left:2px;}
+.glitch::after{color:var(--cyan);clip-path:polygon(0 60%,100% 60%,100% 75%,0 75%);animation:glitch-a 4s infinite;left:-2px;}
+@keyframes glitch{0%,90%,100%{transform:none}91%{transform:skewX(-2deg)}93%{transform:skewX(2deg)}}
+@keyframes glitch-b{0%,88%,100%{opacity:0}89%{opacity:.8;transform:translate(-3px,1px)}91%{opacity:.8;transform:translate(3px,-1px)}93%{opacity:0}}
+@keyframes glitch-a{0%,88%,100%{opacity:0}90%{opacity:.8;transform:translate(3px,2px)}92%{opacity:.8;transform:translate(-2px,-1px)}94%{opacity:0}}
+.hero-divider{display:flex;align-items:center;gap:1rem;justify-content:center;margin:1.5rem 0;opacity:0;animation:fadeSlideDown .8s .7s forwards;}
+.hero-divider span{display:block;height:1px;width:60px;}
+.hero-divider span:first-child{background:linear-gradient(90deg,transparent,var(--cyan));}
+.hero-divider span:last-child{background:linear-gradient(90deg,var(--cyan),transparent);}
+.hero-divider em{font-family:'Share Tech Mono',monospace;font-size:.75rem;font-style:normal;color:var(--cyan);letter-spacing:.2em;}
+.hero-tagline{font-size:1.1rem;font-weight:300;color:var(--muted);letter-spacing:.05em;max-width:520px;opacity:0;animation:fadeSlideDown .8s .9s forwards;}
+.hero-tagline strong{color:var(--text);font-weight:500;}
+.hero-cta{display:flex;gap:1rem;margin-top:3rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeSlideDown .8s 1.1s forwards;}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeIn 1s 1.5s forwards;}
+.hero-scroll span{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.3em;color:var(--muted);}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--cyan),transparent);animation:scrollPulse 2s ease infinite;}
+@keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+.btn{font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;padding:.85rem 2rem;border:1px solid;text-decoration:none;transition:all .3s;cursor:pointer;background:transparent;display:inline-block;}
+.btn-primary{color:var(--cyan);border-color:var(--cyan);box-shadow:0 0 20px rgba(0,255,225,.15);}
+.btn-primary:hover{box-shadow:0 0 35px rgba(0,255,225,.3);text-shadow:0 0 10px var(--cyan);}
+.btn-ghost{color:var(--muted);border-color:rgba(90,90,122,.4);}
+.btn-ghost:hover{color:var(--text);border-color:var(--muted);}
+.btn-sm{padding:.5rem 1.2rem;font-size:.65rem;}
+section{padding:7rem 4rem;position:relative;}
+.container{max-width:1100px;margin:0 auto;}
+.section-header{margin-bottom:4rem;}
+.section-tag{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.4em;color:var(--cyan);text-transform:uppercase;display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem;}
+.section-tag::before{content:'';display:block;width:30px;height:1px;background:var(--cyan);}
+.section-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:#fff;line-height:1.2;}
+#about{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-text p{color:var(--muted);margin-bottom:1.25rem;font-size:1rem;font-weight:300;line-height:1.9;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.stat-card{border:1px solid var(--border);background:rgba(0,255,225,.03);padding:1.5rem;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.stat-card:hover::before{transform:scaleX(1);}
+.stat-card:hover{border-color:rgba(0,255,225,.3);box-shadow:0 0 25px rgba(0,255,225,.08);}
+.stat-number{font-family:'Share Tech Mono',monospace;font-size:2rem;color:var(--cyan);display:block;text-shadow:0 0 20px rgba(0,255,225,.4);}
+.stat-label{font-size:.85rem;color:var(--muted);letter-spacing:.1em;}
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+.skill-category{border:1px solid var(--border);background:var(--bg2);padding:2rem;transition:transform .3s,box-shadow .3s;}
+.skill-category:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.4),0 0 30px rgba(0,255,225,.06);}
+.skill-icon{font-size:1.8rem;margin-bottom:1rem;display:block;}
+.skill-cat-title{font-family:'Cinzel Decorative',serif;font-size:.95rem;color:#fff;margin-bottom:1.25rem;}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.skill-list li{font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:.6rem;font-weight:300;}
+.skill-list li::before{content:'';display:block;width:5px;height:5px;border:1px solid var(--cyan);flex-shrink:0;transform:rotate(45deg);}
+#projects{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.builds-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.build-card{border:1px solid var(--border);background:var(--bg);padding:2.5rem;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s;cursor:pointer;}
+.build-card:hover{border-color:rgba(0,255,225,.3);box-shadow:0 0 40px rgba(0,255,225,.07);}
+.build-card::after{content:'';position:absolute;bottom:0;right:0;width:80px;height:80px;background:radial-gradient(circle at bottom right,rgba(0,255,225,.07),transparent 70%);}
+.status-row{display:flex;align-items:center;margin-bottom:.75rem;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--muted);}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:.5rem;flex-shrink:0;}
+.dot-active{background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 2s ease infinite;}
+.dot-planned{background:var(--muted);}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.build-title{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:#fff;margin-bottom:.75rem;line-height:1.3;}
+.build-desc{font-size:.95rem;color:var(--muted);font-weight:300;line-height:1.8;margin-bottom:1.5rem;}
+.build-progress-label{display:flex;justify-content:space-between;margin-bottom:.4rem;}
+.build-progress-label span{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:var(--muted);}
+.build-progress-label .pct{color:var(--cyan);}
+.progress-track{height:3px;background:rgba(255,255,255,.06);width:100%;margin-bottom:1.5rem;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));box-shadow:0 0 8px var(--cyan);transition:width .6s ease;}
+.build-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;}
+.tag{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.1em;padding:.3rem .7rem;border:1px solid;text-transform:uppercase;}
+.tc{border-color:rgba(0,255,225,.3);color:var(--cyan);}
+.tp{border-color:rgba(155,0,255,.3);color:var(--purple);}
+.tr{border-color:rgba(255,34,68,.3);color:var(--red);}
+.tm{border-color:rgba(255,0,160,.3);color:var(--magenta);}
+.click-hint{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:rgba(0,255,225,.35);display:flex;align-items:center;gap:.4rem;}
+.click-hint::before{content:'▶';font-size:.5rem;}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:2rem;}
+.modal-overlay.open{display:flex;}
+.modal-panel{background:var(--bg2);border:1px solid var(--border);width:100%;max-width:780px;max-height:90vh;overflow-y:auto;animation:modalIn .3s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.modal-head{padding:2rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;position:sticky;top:0;background:var(--bg2);z-index:10;}
+.modal-head h2{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:#fff;}
+.modal-close{font-family:'Share Tech Mono',monospace;font-size:.9rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:.25rem .5rem;transition:color .2s;}
+.modal-close:hover{color:var(--red);}
+.modal-body{padding:2rem 2.5rem;}
+.m-section{margin-bottom:2rem;}
+.m-title{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);}
+.progress-edit{display:flex;align-items:center;gap:1rem;margin-bottom:.75rem;}
+.progress-edit input[type=range]{flex:1;-webkit-appearance:none;height:4px;background:rgba(255,255,255,.1);outline:none;}
+.progress-edit input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--cyan);box-shadow:0 0 8px var(--cyan);cursor:pointer;}
+.pct-display{font-family:'Share Tech Mono',monospace;font-size:1.2rem;color:var(--cyan);min-width:3.5rem;text-align:right;}
+.log-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.25rem;max-height:200px;overflow-y:auto;}
+.log-entry{background:var(--bg);border:1px solid var(--border);padding:.75rem 1rem;}
+.log-date{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.15em;color:var(--magenta);margin-bottom:.25rem;}
+.log-text{font-size:.9rem;color:var(--muted);font-weight:300;}
+.log-empty{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--muted);opacity:.5;}
+textarea.mi{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:.95rem;font-weight:300;padding:.75rem 1rem;resize:vertical;min-height:80px;outline:none;transition:border-color .2s;}
+textarea.mi:focus{border-color:rgba(0,255,225,.3);}
+textarea.mi::placeholder{color:var(--muted);opacity:.6;}
+.m-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem;}
+#events{padding:7rem 4rem;}
+.ev-tabs{display:flex;border:1px solid var(--border);margin-bottom:3rem;}
+.ev-tab{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;padding:.85rem 2rem;background:none;border:none;border-right:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;}
+.ev-tab:last-child{border-right:none;}
+.ev-tab.active{background:rgba(0,255,225,.05);color:var(--cyan);}
+.ev-tab:hover{color:var(--text);}
+.ev-panel{display:none;}
+.ev-panel.active{display:block;}
+.ev-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.ev-card{border:1px solid var(--border);background:var(--bg2);overflow:hidden;transition:border-color .3s,box-shadow .3s;cursor:pointer;}
+.ev-card:hover{border-color:rgba(255,0,160,.3);box-shadow:0 0 40px rgba(255,0,160,.06);}
+.ev-card.upcoming{border-color:rgba(155,0,255,.2);}
+.ev-card.upcoming:hover{border-color:rgba(155,0,255,.4);box-shadow:0 0 40px rgba(155,0,255,.08);}
+.ev-head{padding:2rem 2rem 1.5rem;}
+.ev-badge{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.3em;color:var(--magenta);margin-bottom:.75rem;}
+.ev-card.upcoming .ev-badge{color:var(--purple);}
+.ev-name{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:#fff;margin-bottom:.5rem;line-height:1.3;}
+.ev-meta{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.1em;color:var(--muted);}
+.ev-score-row{display:flex;align-items:center;gap:.5rem;margin-top:1rem;}
+.ev-stars{display:flex;gap:2px;}
+.ev-star{font-size:1rem;}
+.ev-star.on{filter:drop-shadow(0 0 3px var(--cyan));}
+.ev-score-num{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--cyan);}
+.ev-thumbs{display:flex;gap:4px;height:160px;border-top:1px solid var(--border);}
+.ev-thumb{flex:1;background:var(--bg3);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+.ev-thumb img{width:100%;height:100%;object-fit:cover;opacity:.85;}
+.ev-hint{padding:.85rem 2rem;font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:rgba(255,0,160,.35);border-top:1px solid var(--border);}
+.ev-card.upcoming .ev-hint{color:rgba(155,0,255,.45);}
+.ev-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:none;align-items:flex-start;justify-content:center;backdrop-filter:blur(4px);padding:2rem;overflow-y:auto;}
+.ev-modal-overlay.open{display:flex;}
+.ev-modal{background:var(--bg2);border:1px solid var(--border);width:100%;max-width:860px;animation:modalIn .3s ease;margin:auto;}
+.ev-modal-head{padding:2rem 2.5rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.ev-modal-head h2{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:#fff;margin-bottom:.3rem;}
+.ev-modal-head p{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.15em;color:var(--muted);}
+.ev-modal-body{padding:2rem 2.5rem;}
+.star-row{display:flex;gap:.4rem;margin-bottom:.6rem;}
+.star-btn{font-size:1.4rem;background:none;border:none;cursor:pointer;opacity:.25;transition:opacity .15s,transform .15s,filter .15s;}
+.star-btn.on{opacity:1;filter:drop-shadow(0 0 5px var(--cyan));}
+.star-btn:hover{transform:scale(1.2);}
+.score-lbl{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--cyan);letter-spacing:.1em;margin-bottom:.5rem;}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.6rem;}
+.photo-slot{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s;font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:.1em;color:var(--muted);}
+.photo-slot:hover{border-color:rgba(0,255,225,.3);}
+.photo-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.photo-slot input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;}
+.photo-note{font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.08em;color:var(--muted);opacity:.45;}
+.diff-presets{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem;}
+.diff-btn{font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.1em;padding:.28rem .7rem;border:1px solid rgba(255,34,68,.25);color:rgba(255,34,68,.4);background:none;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.diff-btn.on{color:var(--red);border-color:var(--red);background:rgba(255,34,68,.07);}
+.diff-btn:hover{color:var(--red);border-color:rgba(255,34,68,.6);}
+.go-again-row{display:flex;gap:1rem;margin-bottom:.75rem;}
+.ga-btn{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.15em;padding:.5rem 1.2rem;border:1px solid;background:none;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.ga-btn.yes{color:rgba(0,255,225,.35);border-color:rgba(0,255,225,.2);}
+.ga-btn.yes.on,.ga-btn.yes:hover{color:var(--cyan);border-color:var(--cyan);background:rgba(0,255,225,.05);}
+.ga-btn.no{color:rgba(255,34,68,.35);border-color:rgba(255,34,68,.2);}
+.ga-btn.no.on,.ga-btn.no:hover{color:var(--red);border-color:var(--red);background:rgba(255,34,68,.05);}
+.add-ev-btn{margin-top:1.5rem;font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;padding:.75rem 1.75rem;border:1px dashed rgba(0,255,225,.25);color:rgba(0,255,225,.4);background:none;cursor:pointer;transition:all .3s;display:block;}
+.add-ev-btn:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,255,225,.04);}
+.ev-card-wrap{position:relative;}
+.ev-delete-btn{position:absolute;top:.6rem;right:.6rem;font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.1em;padding:.2rem .5rem;border:1px solid rgba(255,34,68,.3);color:rgba(255,34,68,.4);background:var(--bg2);cursor:pointer;z-index:5;transition:all .2s;opacity:0;}
+.ev-card-wrap:hover .ev-delete-btn{opacity:1;}
+.ev-delete-btn:hover{color:var(--red);border-color:var(--red);background:rgba(255,34,68,.08);}
+.form-field{margin-bottom:1.25rem;}
+.form-label{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:.4rem;}
+input.fi{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:400;padding:.6rem 1rem;outline:none;transition:border-color .2s;}
+input.fi:focus{border-color:rgba(0,255,225,.35);}
+input.fi::placeholder{color:var(--muted);opacity:.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.type-btns{display:flex;flex-wrap:wrap;gap:.5rem;}
+.type-btn{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.1em;padding:.3rem .8rem;border:1px solid rgba(90,90,122,.3);color:var(--muted);background:none;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.type-btn.on{color:var(--cyan);border-color:var(--cyan);background:rgba(0,255,225,.05);}
+.int-card{background:var(--bg2);border:1px solid var(--border);padding:1.25rem .75rem;text-align:center;transition:all .3s;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;}
+.int-card:hover{border-color:rgba(255,0,160,.5);box-shadow:0 0 30px rgba(255,0,160,.1);transform:translateY(-4px) scale(1.03);}
+.int-emoji{font-size:1.6rem;display:block;margin-bottom:.5rem;}
+.int-label{font-family:'Cinzel Decorative',serif;font-size:.72rem;color:#fff;display:block;}
+.interests-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:.75rem;width:100%;}
+.passion-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:3000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:2rem;}
+.passion-overlay.open{display:flex;}
+.passion-popup{background:var(--bg2);border:1px solid var(--border);max-width:480px;width:100%;padding:2.5rem;position:relative;text-align:center;animation:modalIn .3s ease;}
+.passion-popup-emoji{font-size:3rem;display:block;margin-bottom:1rem;}
+.passion-popup-title{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:#fff;margin-bottom:1.25rem;}
+.passion-popup-body{font-size:.95rem;color:#9999bb;font-weight:300;line-height:1.85;margin-bottom:1.75rem;}
+.passion-popup-tags{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:1.75rem;}
+.passion-popup-close{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.2em;color:var(--muted);background:none;border:1px solid rgba(90,90,122,.3);padding:.5rem 1.25rem;cursor:pointer;text-transform:uppercase;transition:all .2s;}
+.passion-popup-close:hover{color:var(--text);border-color:var(--muted);}
+#game{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg);}
+.tg-wrap{border:1px solid var(--border);background:var(--bg);position:relative;min-height:480px;}
+.tg-topbar{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.5rem;background:rgba(0,255,225,.03);border-bottom:1px solid var(--border);font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.15em;}
+.tg-topbar-left{color:var(--cyan);}
+.tg-topbar-right{display:flex;gap:2.5rem;}
+.tg-stat{color:var(--muted);}
+.tg-stat span{color:var(--cyan);font-size:.85rem;}
+.tg-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:3px;padding:1.25rem 1.5rem;background:var(--bg);}
+.tg-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;font-size:1rem;color:rgba(90,90,122,.4);border:1px solid rgba(255,255,255,.04);cursor:default;transition:color .1s,background .1s,border-color .1s;user-select:none;}
+.tg-cell.active{color:var(--cyan);border-color:rgba(0,255,225,.5);background:rgba(0,255,225,.07);cursor:pointer;animation:cellPulse .6s ease infinite;}
+.tg-cell.active:hover{background:rgba(0,255,225,.18);box-shadow:0 0 14px rgba(0,255,225,.35);}
+.tg-cell.sorted{color:var(--magenta);border-color:rgba(255,0,160,.5);background:rgba(255,0,160,.08);cursor:default;animation:none;}
+.tg-cell.missed{color:var(--red);border-color:rgba(255,34,68,.4);background:rgba(255,34,68,.06);animation:none;}
+@keyframes cellPulse{0%,100%{box-shadow:0 0 4px rgba(0,255,225,.2)}50%{box-shadow:0 0 14px rgba(0,255,225,.55)}}
+.tg-bins{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--border);}
+.tg-bin{padding:1.1rem 1.5rem;border-right:1px solid var(--border);}
+.tg-bin:last-child{border-right:none;}
+.tg-bin-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem;}
+.tg-bin-name{font-family:'Share Tech Mono',monospace;font-size:.75rem;letter-spacing:.3em;}
+.tg-bin-count{font-family:'Share Tech Mono',monospace;font-size:.9rem;}
+.tg-bin-track{height:5px;background:rgba(255,255,255,.05);}
+.tg-bin-fill{height:100%;width:0%;transition:width .4s ease;}
+.tg-footer{display:flex;align-items:center;gap:1rem;padding:.7rem 1.5rem;border-top:1px solid var(--border);background:rgba(0,0,0,.25);}
+.tg-footer-lbl{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--magenta);flex-shrink:0;}
+.tg-msg{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.08em;color:#7777aa;transition:opacity .3s;}
+.tg-overlay{position:absolute;inset:0;background:rgba(7,7,15,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;z-index:20;}
+.tg-overlay-title{font-family:'Cinzel Decorative',serif;font-size:1.8rem;color:var(--cyan);text-align:center;text-shadow:0 0 30px rgba(0,255,225,.5);line-height:1.3;}
+.tg-overlay-sub{font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:.15em;color:var(--muted);text-align:center;line-height:2.4;max-width:480px;}
+.tg-overlay-sub em{color:rgba(0,255,225,.5);font-style:normal;font-size:.62rem;}
+#contact{text-align:center;padding:8rem 4rem;border-top:1px solid var(--border);}
+#contact .section-tag{justify-content:center;}
+#contact .section-tag::before{display:none;}
+.contact-sub{max-width:480px;margin:1rem auto 3rem;color:var(--muted);font-size:1rem;font-weight:300;}
+.contact-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;}
+footer{border-top:1px solid var(--border);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;}
+footer span{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.15em;color:var(--muted);}
+.footer-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 2s ease infinite;}
+@keyframes fadeSlideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+::selection{background:rgba(0,255,225,.2);color:var(--cyan);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);}
+@media(max-width:900px){section{padding:5rem 2rem;}nav{padding:1rem 2rem;}.nav-links{gap:1.5rem;}.about-grid,.builds-grid,.ev-grid{grid-template-columns:1fr;}.skills-grid{grid-template-columns:1fr 1fr;}.interests-grid{grid-template-columns:repeat(4,1fr);}footer{flex-direction:column;gap:1rem;text-align:center;}}
+@media(max-width:580px){.skills-grid{grid-template-columns:1fr;}.nav-links{display:none;}.hero-name{font-size:clamp(2.5rem,14vw,4rem);}.photo-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#hero" class="nav-logo">[ SUZY.EXE ]</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#game">Game</a></li>
+    <li><a href="#projects">Builds</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#interests">Passions</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="orb-1 hero-orb"></div><div class="orb-2 hero-orb"></div><div class="orb-3 hero-orb"></div>
+  <p class="hero-eyebrow">// Gamer &nbsp;·&nbsp; Builder &nbsp;·&nbsp; Music Obsessive &nbsp;·&nbsp; Liverpool, UK</p>
+  <h1 class="hero-name"><span class="glitch" data-text="SUZY">SUZY</span></h1>
+  <div class="hero-divider"><span></span><em>[ EST. 1998 ]</em><span></span></div>
+  <p class="hero-tagline"><strong>Creature of the dark. Builder of things.</strong><br>Building cyberdecks and haunting Jellyfin servers into the early hours.</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Builds</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+  <div class="hero-scroll"><span>SCROLL</span><div class="scroll-line"></div></div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-header">
+          <p class="section-tag">01 // About</p>
+          <h2 class="section-title">Dark Star,<br>Liverpool</h2>
+        </div>
+        <p>I'm Suzy — <strong>27, Liverpool-based</strong>, and entirely uninterested in being ordinary. I live at the intersection of obsessive detail, dark aesthetics, and a deep love for things that most people don't bother to understand properly.</p>
+        <p>I spent time working at <strong>PlayStation</strong> — hands down the best job I've had — and walked away with a level of insight into the games industry that doesn't come from the outside. What it also gave me was a very clear picture of what it feels like when something you love becomes a workplace, for better and for worse.</p>
+        <p>These days I pour that same obsessive energy into my own projects — <strong>hardware builds, self-hosted tech, and a media setup I'm genuinely proud of</strong>. When I'm not deep in a project or a playlist, I'm probably having a conversation that goes three hours longer than anyone expected, or walking <strong>Buddy</strong> while pretending I enjoy being outside.</p>
+        <p>I think slowly, thoroughly, and in first principles. I don't do surface-level — not in music, not in aesthetics, not in anything I actually care about.</p>
+      </div>
+      <div class="about-stats reveal" style="transition-delay:.15s;">
+        <div class="stat-card"><span class="stat-number">27</span><span class="stat-label">Years of Existence</span></div>
+        <div class="stat-card"><span class="stat-number">∞</span><span class="stat-label">Hours in Headphones</span></div>
+        <div class="stat-card"><span class="stat-number">1</span><span class="stat-label">Very Good Boy (Buddy)</span></div>
+        <div class="stat-card"><span class="stat-number">3×</span><span class="stat-label">Download Festival</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag">02 // Skills</p>
+      <h2 class="section-title">What I Do</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-category reveal">
+        <span class="skill-icon">🎮</span>
+        <h3 class="skill-cat-title">Gaming & Industry</h3>
+        <ul class="skill-list">
+          <li>PlayStation ecosystem knowledge</li>
+          <li>Games industry insight</li>
+          <li>Deep lore & world-building</li>
+          <li>Platform hardware & tech</li>
+          <li>Critical analysis & review</li>
+        </ul>
+      </div>
+      <div class="skill-category reveal" style="transition-delay:.1s;">
+        <span class="skill-icon">🔧</span>
+        <h3 class="skill-cat-title">Tech & Building</h3>
+        <ul class="skill-list">
+          <li>Home server & self-hosting</li>
+          <li>Hardware building & modding</li>
+          <li>Cyberdeck design & fabrication</li>
+          <li>Linux & network setup</li>
+          <li>Media management & curation</li>
+        </ul>
+      </div>
+      <div class="skill-category reveal" style="transition-delay:.2s;">
+        <span class="skill-icon">🖤</span>
+        <h3 class="skill-cat-title">Creative Vision</h3>
+        <ul class="skill-list">
+          <li>Aesthetic curation & direction</li>
+          <li>Gothic & cyberpunk styling</li>
+          <li>Festival wardrobe & outfit design</li>
+          <li>Obsessive research & planning</li>
+          <li>Critical & strategic thinking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="game">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag">02.5 // System Breach</p>
+      <h2 class="section-title">Data.Sort_exe</h2>
+    </div>
+    <div class="tg-wrap" id="tg-wrap">
+      <div class="tg-overlay" id="tg-overlay">
+        <div class="tg-overlay-title">DATA_SORT.EXE<br>v2.3</div>
+        <div class="tg-overlay-sub">
+          USER: SUZY &nbsp;·&nbsp; SYS: ONLINE &nbsp;·&nbsp; THREAT: INCOMING<br>
+          THE NETWORK IS COMPROMISED<br>
+          CLICK THE GLOWING PACKETS BEFORE THEY SPREAD<br>
+          <em>// they pulse cyan. trust your instincts.</em>
+        </div>
+        <button class="btn btn-primary" onclick="startGame()">JACK IN</button>
+      </div>
+      <div class="tg-topbar">
+        <span class="tg-topbar-left">DATA_SORT.EXE &nbsp;//&nbsp; USER: SUZY &nbsp;//&nbsp; BREACH ACTIVE</span>
+        <div class="tg-topbar-right">
+          <span class="tg-stat">PURGED: <span id="tg-score">0</span></span>
+          <span class="tg-stat">THREAT: <span id="tg-speed">STANDBY</span></span>
+        </div>
+      </div>
+      <div class="tg-grid" id="tg-grid"></div>
+      <div class="tg-bins" id="tg-bins">
+        <div class="tg-bin"><div class="tg-bin-top"><span class="tg-bin-name" style="color:var(--cyan)">FRAG</span><span class="tg-bin-count" id="tg-bc-0" style="color:var(--cyan)">0</span></div><div class="tg-bin-track"><div class="tg-bin-fill" id="tg-bf-0" style="background:var(--cyan)"></div></div></div>
+        <div class="tg-bin"><div class="tg-bin-top"><span class="tg-bin-name" style="color:var(--purple)">CORE</span><span class="tg-bin-count" id="tg-bc-1" style="color:var(--purple)">0</span></div><div class="tg-bin-track"><div class="tg-bin-fill" id="tg-bf-1" style="background:var(--purple)"></div></div></div>
+        <div class="tg-bin"><div class="tg-bin-top"><span class="tg-bin-name" style="color:var(--magenta)">VOID</span><span class="tg-bin-count" id="tg-bc-2" style="color:var(--magenta)">0</span></div><div class="tg-bin-track"><div class="tg-bin-fill" id="tg-bf-2" style="background:var(--magenta)"></div></div></div>
+        <div class="tg-bin"><div class="tg-bin-top"><span class="tg-bin-name" style="color:var(--red)">FLUX</span><span class="tg-bin-count" id="tg-bc-3" style="color:var(--red)">0</span></div><div class="tg-bin-track"><div class="tg-bin-fill" id="tg-bf-3" style="background:var(--red)"></div></div></div>
+      </div>
+      <div class="tg-footer">
+        <span class="tg-footer-lbl">// SYS:</span>
+        <span class="tg-msg" id="tg-msg">JACK IN TO BEGIN. THE NETWORK IS WAITING.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag">03 // Current Builds</p>
+      <h2 class="section-title">What I'm Building</h2>
+    </div>
+    <div class="builds-grid" id="builds-grid"></div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag">04 // Live Events</p>
+      <h2 class="section-title">Gigs & Festivals</h2>
+    </div>
+    <div class="ev-tabs">
+      <button class="ev-tab active" data-tab="upcoming">Upcoming</button>
+      <button class="ev-tab" data-tab="past">Past Events</button>
+    </div>
+    <div class="ev-panel active" id="tab-upcoming">
+      <div class="ev-grid" id="upcoming-grid"></div>
+      <button class="add-ev-btn" onclick="openAddEvent('upcoming')">+ Add Upcoming Event</button>
+    </div>
+    <div class="ev-panel" id="tab-past">
+      <div class="ev-grid" id="past-grid"></div>
+      <button class="add-ev-btn" onclick="openAddEvent('past')">+ Add Past Event</button>
+    </div>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag">05 // Passions</p>
+      <h2 class="section-title">What Moves Me</h2>
+    </div>
+  </div>
+  <div class="interests-grid" style="padding:0 4rem;">
+    <div class="int-card reveal" onclick="openPassion(0)"><span class="int-emoji">🎸</span><span class="int-label">Heavy Music</span></div>
+    <div class="int-card reveal" style="transition-delay:.05s;" onclick="openPassion(1)"><span class="int-emoji">🎮</span><span class="int-label">Gaming</span></div>
+    <div class="int-card reveal" style="transition-delay:.1s;" onclick="openPassion(2)"><span class="int-emoji">🖤</span><span class="int-label">Aesthetic</span></div>
+    <div class="int-card reveal" style="transition-delay:.15s;" onclick="openPassion(3)"><span class="int-emoji">🐾</span><span class="int-label">Buddy</span></div>
+    <div class="int-card reveal" style="transition-delay:.2s;" onclick="openPassion(4)"><span class="int-emoji">🇫🇮</span><span class="int-label">Finland</span></div>
+    <div class="int-card reveal" style="transition-delay:.25s;" onclick="openPassion(5)"><span class="int-emoji">💿</span><span class="int-label">Deep Dives</span></div>
+    <div class="int-card reveal" style="transition-delay:.3s;" onclick="openPassion(6)"><span class="int-emoji">🏠</span><span class="int-label">Indoor Life</span></div>
+    <div class="int-card reveal" style="transition-delay:.35s;" onclick="openPassion(7)"><span class="int-emoji">🌙</span><span class="int-label">Night Mode</span></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container reveal">
+    <p class="section-tag">06 // Contact</p>
+    <h2 class="section-title" style="margin-bottom:0;">Let's Connect</h2>
+    <p class="contact-sub">Whether it's a collab, a conversation, or just someone else who'd die for Ghost — I'm here.</p>
+    <div class="contact-links">
+      <a href="mailto:hello@suzy.dev" class="btn btn-primary">hello@suzy.dev</a>
+      <a href="#" class="btn btn-ghost">Instagram</a>
+      <a href="#" class="btn btn-ghost">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>// SUZY &copy; 2026 — Liverpool, UK</span>
+  <div class="footer-dot"></div>
+  <span>Built with obsessive attention to detail</span>
+</footer>
+
+<!-- BUILD MODAL -->
+<div class="modal-overlay" id="build-modal">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <h2 id="bm-title"></h2>
+        <div class="status-row" id="bm-status" style="margin-top:.4rem;margin-bottom:0;"></div>
+      </div>
+      <button class="modal-close" onclick="closeBuildModal()">✕ CLOSE</button>
+    </div>
+    <div class="modal-body">
+      <div class="m-section">
+        <div class="m-title">Progress</div>
+        <div class="progress-edit">
+          <input type="range" min="0" max="100" step="1" id="bm-range">
+          <span class="pct-display" id="bm-pct">0%</span>
+        </div>
+        <div class="progress-track"><div class="progress-bar" id="bm-bar" style="width:0%"></div></div>
+      </div>
+      <div class="m-section">
+        <div class="m-title">Build Photos</div>
+        <div class="photo-grid" id="bm-photos"></div>
+        <div class="photo-note">// Photos display this session only.</div>
+      </div>
+      <div class="m-section">
+        <div class="m-title">Build Log</div>
+        <div class="log-list" id="bm-log"></div>
+        <textarea class="mi" id="bm-input" placeholder="Add a new log entry — what did you work on?"></textarea>
+      </div>
+      <div class="m-actions">
+        <button class="btn btn-primary btn-sm" onclick="saveBuild()">Save Progress</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeBuildModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EVENT MODAL -->
+<div class="ev-modal-overlay" id="event-modal">
+  <div class="ev-modal">
+    <div class="ev-modal-head">
+      <div>
+        <h2 id="em-title"></h2>
+        <p id="em-meta"></p>
+      </div>
+      <button class="modal-close" onclick="closeEventModal()">✕ CLOSE</button>
+    </div>
+    <div class="ev-modal-body">
+      <div class="m-section">
+        <div class="m-title">Score — out of 10</div>
+        <div class="star-row" id="em-stars"></div>
+        <div class="score-lbl" id="em-score-lbl">Not rated yet</div>
+      </div>
+      <div class="m-section">
+        <div class="m-title">Photos</div>
+        <div class="photo-grid" id="em-photos"></div>
+        <div class="photo-note">// Photos display this session only.</div>
+      </div>
+      <div class="m-section">
+        <div class="m-title">Highlights & Thoughts</div>
+        <textarea class="mi" id="em-thoughts" placeholder="Best moments, standout acts, unexpected highlights..."></textarea>
+      </div>
+      <div class="m-section">
+        <div class="m-title">Difficulties</div>
+        <div class="diff-presets" id="em-diffs"></div>
+        <textarea class="mi" id="em-diff-text" placeholder="Anything that went wrong or could've been better..."></textarea>
+      </div>
+      <div class="m-section">
+        <div class="m-title">Would You Go Again?</div>
+        <div class="go-again-row">
+          <button class="ga-btn yes" id="ga-yes" onclick="setGA('yes')">✓ Absolutely</button>
+          <button class="ga-btn no" id="ga-no" onclick="setGA('no')">✕ Probably Not</button>
+        </div>
+      </div>
+      <div class="m-actions">
+        <button class="btn btn-primary btn-sm" onclick="saveEvent()">Save Review</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeEventModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASSION POPUP -->
+<div class="passion-overlay" id="passion-overlay" onclick="if(event.target===this)closePassion()">
+  <div class="passion-popup">
+    <span class="passion-popup-emoji" id="pp-emoji"></span>
+    <div class="passion-popup-title" id="pp-title"></div>
+    <div class="passion-popup-body" id="pp-body"></div>
+    <div class="passion-popup-tags" id="pp-tags"></div>
+    <button class="passion-popup-close" onclick="closePassion()">✕ Close</button>
+  </div>
+</div>
+
+<!-- ADD EVENT MODAL -->
+<div class="modal-overlay" id="add-event-modal">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <h2 id="aem-title">Add Event</h2>
+      <button class="modal-close" onclick="closeAddEvent()">✕ CLOSE</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label class="form-label">Event Name</label>
+        <input class="fi" id="aem-name" placeholder="e.g. Ghost — Rite Here Rite Now Tour">
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Venue</label>
+          <input class="fi" id="aem-venue" placeholder="e.g. Manchester Arena">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Date</label>
+          <input class="fi" id="aem-date" placeholder="e.g. March 2026">
+        </div>
+      </div>
+      <div class="form-field">
+        <label class="form-label">Type</label>
+        <div class="type-btns" id="aem-types">
+          <button class="type-btn on" onclick="setType(this,'Festival')">Festival</button>
+          <button class="type-btn" onclick="setType(this,'Arena Tour')">Arena Tour</button>
+          <button class="type-btn" onclick="setType(this,'Club Show')">Club Show</button>
+          <button class="type-btn" onclick="setType(this,'Theatre')">Theatre</button>
+          <button class="type-btn" onclick="setType(this,'Open Air')">Open Air</button>
+          <button class="type-btn" onclick="setType(this,'Other')">Other</button>
+        </div>
+      </div>
+      <div class="m-actions" style="margin-top:1.5rem;">
+        <button class="btn btn-primary btn-sm" onclick="saveNewEvent()">Add Event</button>
+        <button class="btn btn-ghost btn-sm" onclick="closeAddEvent()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────
+const BUILDS = [
+  {id:'jellyfin',title:'Jellyfin Home Server',type:'Media Server',status:'active',
+   desc:'A fully self-hosted personal media ecosystem. Custom libraries, user management, live TV experiments, and remote streaming — all running out of my own setup. No subscriptions, no compromises, total control.',
+   tags:[{l:'Jellyfin',c:'tc'},{l:'Self-Hosting',c:'tp'},{l:'Linux',c:'tc'}]},
+  {id:'cyberdeck',title:'Cyberdeck Build',type:'Hardware Build',status:'active',
+   desc:'A custom cyberpunk-aesthetic portable computing device — designed from the ground up. Part functional machine, part art object. Built to turn heads and run commands in equal measure.',
+   tags:[{l:'Hardware',c:'tr'},{l:'Fabrication',c:'tp'},{l:'Raspberry Pi',c:'tm'}]},
+  {id:'dl26prep',title:'Download Festival 2026',type:'Event Prep',status:'active',
+   desc:'Third time attending, first time with VIP/RIP access. Full look curation from scratch — outfits, kit, logistics. Treating festival prep the way any project deserves: with obsessive detail and zero margin for error.',
+   tags:[{l:'Planning',c:'tc'},{l:'Styling',c:'tm'},{l:'Donington 2026',c:'tp'}]},
+];
+
+const PAST_EVENTS = [
+  {id:'dl2023',name:'Download Festival 2023',venue:'Donington Park, UK',date:'June 2023',badge:'Festival'},
+  {id:'dl2025',name:'Download Festival 2025',venue:'Donington Park, UK',date:'June 2025',badge:'Festival'},
+  {id:'beyonce2024',name:'Beyoncé — Cowboy Carter Tour',venue:'UK',date:'2024',badge:'Arena Tour'},
+];
+
+const UPCOMING_EVENTS = [
+  {id:'dl2026',name:'Download Festival 2026',venue:'Donington Park, UK',date:'June 2026',badge:'Festival — VIP/RIP'},
+];
+
+const DIFF_OPTIONS = ['Weather','Long Queues','Camping','Travel/Getting There','Getting Lost','Crowd Crush','Sound Issues','Expensive Food','Tired Feet','Phone Died','Accommodation','Clashing Set Times'];
+
+// ── STORAGE ───────────────────────────────────────
+const S = {
+  get:(k)=>{try{return JSON.parse(localStorage.getItem('suzy_'+k))||null;}catch{return null;}},
+  set:(k,v)=>{try{localStorage.setItem('suzy_'+k,JSON.stringify(v));}catch{}}
+};
+
+// ── BUILDS ────────────────────────────────────────
+let activeBuild = null;
+
+function dotHtml(status){
+  return status==='active'
+    ? '<span class="dot dot-active"></span>ACTIVE'
+    : '<span class="dot dot-planned"></span>PLANNED';
+}
+
+function renderBuilds(){
+  const grid = document.getElementById('builds-grid');
+  grid.innerHTML = BUILDS.map(b=>{
+    const st = S.get('build_'+b.id)||{progress:0,log:[]};
+    const pct = st.progress||0;
+    return `<div class="build-card reveal" onclick="openBuild('${b.id}')">
+      <div class="status-row">${dotHtml(b.status)}</div>
+      <div class="build-tags" style="margin-bottom:.5rem;"><span class="tag tm" style="font-size:.6rem;">${b.type}</span></div>
+      <div class="build-title">${b.title}</div>
+      <div class="build-desc">${b.desc}</div>
+      <div class="build-progress-label"><span>Progress</span><span class="pct">${pct}%</span></div>
+      <div class="progress-track"><div class="progress-bar" style="width:${pct}%"></div></div>
+      <div class="build-tags">${b.tags.map(t=>`<span class="tag ${t.c}">${t.l}</span>`).join('')}</div>
+      <div class="click-hint">Click to update progress & add log entry</div>
+    </div>`;
+  }).join('');
+  observeReveal();
+}
+
+function openBuild(id){
+  activeBuild = id;
+  const b = BUILDS.find(x=>x.id===id);
+  const st = S.get('build_'+id)||{progress:0,log:[]};
+  const pct = st.progress||0;
+  document.getElementById('bm-title').textContent = b.title;
+  document.getElementById('bm-status').innerHTML = dotHtml(b.status);
+  const rng = document.getElementById('bm-range');
+  rng.value = pct;
+  document.getElementById('bm-pct').textContent = pct+'%';
+  document.getElementById('bm-bar').style.width = pct+'%';
+  rng.oninput = function(){
+    document.getElementById('bm-pct').textContent = this.value+'%';
+    document.getElementById('bm-bar').style.width = this.value+'%';
+  };
+  const log = st.log||[];
+  const logEl = document.getElementById('bm-log');
+  logEl.innerHTML = log.length===0
+    ? '<div class="log-empty">// No entries yet. Add your first update below.</div>'
+    : log.slice().reverse().map(e=>`<div class="log-entry"><div class="log-date">${e.date}</div><div class="log-text">${e.text}</div></div>`).join('');
+  document.getElementById('bm-input').value = '';
+  document.getElementById('bm-photos').innerHTML = Array.from({length:6},(_,i)=>`
+    <div class="photo-slot" id="bpslot-${id}-${i}">
+      <input type="file" accept="image/*" onchange="loadBuildPhoto('${id}',${i},this)">
+      <span>+ PHOTO</span>
+    </div>`).join('');
+  restoreBuildPhotos(id);
+  document.getElementById('build-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeBuildModal(){
+  document.getElementById('build-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  activeBuild = null;
+}
+
+function saveBuild(){
+  if(!activeBuild) return;
+  const pct = parseInt(document.getElementById('bm-range').value);
+  const txt = document.getElementById('bm-input').value.trim();
+  const st = S.get('build_'+activeBuild)||{progress:0,log:[]};
+  st.progress = pct;
+  if(txt){
+    const now = new Date();
+    const d = now.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' — '+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    st.log.push({date:d,text:txt});
+  }
+  S.set('build_'+activeBuild,st);
+  closeBuildModal();
+  renderBuilds();
+}
+
+// ── CUSTOM EVENTS ─────────────────────────────────
+function getCustomEvents(tab){return S.get('custom_events_'+tab)||[];}
+function saveCustomEvents(tab,arr){S.set('custom_events_'+tab,arr);}
+
+function allPast(){return [...PAST_EVENTS,...getCustomEvents('past')];}
+function allUpcoming(){return [...UPCOMING_EVENTS,...getCustomEvents('upcoming')];}
+
+// ── EVENTS ────────────────────────────────────────
+let activeEvent = null;
+let evScore = 0;
+let evGA = null;
+
+function starsHtml(score, size=''){
+  return Array.from({length:10},(_,i)=>`<span class="ev-star${i<score?' on':''}">★</span>`).join('');
+}
+
+function renderEvents(){
+  const pastEvs = allPast();
+  const upEvs = allUpcoming();
+  const customPastIds = new Set(getCustomEvents('past').map(e=>e.id));
+  const customUpIds = new Set(getCustomEvents('upcoming').map(e=>e.id));
+  document.getElementById('past-grid').innerHTML = pastEvs.map(ev=>{
+    const isCustom = customPastIds.has(ev.id);
+    return `<div class="ev-card-wrap">${isCustom?`<button class="ev-delete-btn" onclick="deleteEvent(event,'${ev.id}','past')">✕ REMOVE</button>`:''}${evCardHtml(ev,false)}</div>`;
+  }).join('');
+  document.getElementById('upcoming-grid').innerHTML = upEvs.map(ev=>{
+    const isCustom = customUpIds.has(ev.id);
+    return `<div class="ev-card-wrap">${isCustom?`<button class="ev-delete-btn" onclick="deleteEvent(event,'${ev.id}','upcoming')">✕ REMOVE</button>`:''}${evCardHtml(ev,true)}</div>`;
+  }).join('');
+  observeReveal();
+  [...pastEvs,...upEvs].forEach(ev=>restoreCardThumbs(ev.id, 4));
+}
+
+function deleteEvent(e, id, tab){
+  e.stopPropagation();
+  const customs = getCustomEvents(tab).filter(ev=>ev.id!==id);
+  saveCustomEvents(tab,customs);
+  renderEvents();
+}
+
+function evCardHtml(ev, upcoming){
+  const st = S.get('event_'+ev.id)||{score:0};
+  const score = st.score||0;
+  const thumbs = Array.from({length:4},(_,i)=>
+    `<div class="ev-thumb" data-ev="${ev.id}" data-i="${i}"></div>`
+  ).join('');
+  const scoreRow = !upcoming ? `<div class="ev-score-row"><div class="ev-stars">${starsHtml(score)}</div><span class="ev-score-num">${score>0?score+'/10':'Unrated'}</span></div>` : '';
+  return `<div class="ev-card ${upcoming?'upcoming':''} reveal" onclick="openEvent('${ev.id}')">
+    <div class="ev-head">
+      <div class="ev-badge">// ${ev.badge}</div>
+      <div class="ev-name">${ev.name}</div>
+      <div class="ev-meta">${ev.venue} &nbsp;·&nbsp; ${ev.date}</div>
+      ${scoreRow}
+    </div>
+    <div class="ev-thumbs">${thumbs}</div>
+    <div class="ev-hint">${upcoming?'▶ Click to plan & track prep':'▶ Click to review, rate & add photos'}</div>
+  </div>`;
+}
+
+function scoreVerb(s){
+  if(s>=9) return 'All-time classic';
+  if(s>=7) return 'Brilliant night';
+  if(s>=5) return 'Solid show';
+  if(s>=3) return 'Mixed feelings';
+  return 'Rough one';
+}
+
+function openEvent(id){
+  activeEvent = id;
+  const all = [...allPast(),...allUpcoming()];
+  const ev = all.find(e=>e.id===id);
+  const st = S.get('event_'+id)||{score:0,thoughts:'',diffs:[],diffText:'',ga:null};
+  evScore = st.score||0;
+  evGA = st.ga||null;
+
+  document.getElementById('em-title').textContent = ev.name;
+  document.getElementById('em-meta').textContent = ev.venue+' · '+ev.date;
+
+  buildModalStars(evScore);
+
+  document.getElementById('em-photos').innerHTML = Array.from({length:8},(_,i)=>`
+    <div class="photo-slot" id="pslot-${i}">
+      <input type="file" accept="image/*" onchange="loadPhoto(${i},this)">
+      <span>+ PHOTO</span>
+    </div>`).join('');
+  restoreEventPhotos(id);
+
+  document.getElementById('em-thoughts').value = st.thoughts||'';
+
+  document.getElementById('em-diffs').innerHTML = DIFF_OPTIONS.map(d=>{
+    const on = (st.diffs||[]).includes(d)?'on':'';
+    return `<button class="diff-btn ${on}" onclick="this.classList.toggle('on')">${d}</button>`;
+  }).join('');
+
+  document.getElementById('em-diff-text').value = st.diffText||'';
+  updateGA(evGA);
+
+  document.getElementById('event-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function buildModalStars(score){
+  document.getElementById('em-stars').innerHTML = Array.from({length:10},(_,i)=>`
+    <button class="star-btn ${i<score?'on':''}" onclick="setScore(${i+1})">★</button>`).join('');
+  document.getElementById('em-score-lbl').textContent = score>0?score+'/10 — '+scoreVerb(score):'Not rated yet';
+}
+
+function setScore(n){
+  evScore = n;
+  buildModalStars(n);
+}
+
+function setGA(v){evGA=v;updateGA(v);}
+function updateGA(v){
+  document.getElementById('ga-yes').classList.toggle('on',v==='yes');
+  document.getElementById('ga-no').classList.toggle('on',v==='no');
+}
+
+// ── PHOTO STORAGE (IndexedDB) ─────────────────────
+const DB_NAME = 'suzy_photos', DB_VER = 1, STORE = 'photos';
+let photoDB = null;
+
+function openPhotoDB(){
+  return new Promise((res,rej)=>{
+    if(photoDB){res(photoDB);return;}
+    const req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = e=>e.target.result.createObjectStore(STORE);
+    req.onsuccess = e=>{photoDB=e.target.result;res(photoDB);};
+    req.onerror = ()=>rej();
+  });
+}
+
+function savePhoto(key, dataUrl){
+  return openPhotoDB().then(db=>{
+    return new Promise((res,rej)=>{
+      const tx = db.transaction(STORE,'readwrite');
+      tx.objectStore(STORE).put(dataUrl, key);
+      tx.oncomplete = res;
+      tx.onerror = rej;
+    });
+  }).catch(()=>{});
+}
+
+function getPhoto(key){
+  return openPhotoDB().then(db=>{
+    return new Promise((res,rej)=>{
+      const req = db.transaction(STORE,'readonly').objectStore(STORE).get(key);
+      req.onsuccess = ()=>res(req.result||null);
+      req.onerror = ()=>res(null);
+    });
+  }).catch(()=>null);
+}
+
+function compressImage(file, maxW, quality, cb){
+  const r = new FileReader();
+  r.onload = e=>{
+    const img = new Image();
+    img.onload = ()=>{
+      const scale = Math.min(1, maxW/img.width);
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width*scale);
+      c.height = Math.round(img.height*scale);
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      cb(c.toDataURL('image/jpeg', quality));
+    };
+    img.src = e.target.result;
+  };
+  r.readAsDataURL(file);
+}
+
+function showPhotoInSlot(slotEl, src){
+  if(!slotEl) return;
+  let img = slotEl.querySelector('img');
+  if(!img){img=document.createElement('img');slotEl.appendChild(img);}
+  img.src = src;
+  const lbl = slotEl.querySelector('span');
+  if(lbl) lbl.style.display='none';
+}
+
+function loadBuildPhoto(id, i, inp){
+  if(!inp.files[0]) return;
+  compressImage(inp.files[0], 600, 0.5, src=>{
+    showPhotoInSlot(document.getElementById('bpslot-'+id+'-'+i), src);
+    savePhoto('bp_'+id+'_'+i, src);
+  });
+}
+
+function loadPhoto(i, inp){
+  if(!inp.files[0]) return;
+  compressImage(inp.files[0], 600, 0.5, src=>{
+    showPhotoInSlot(document.getElementById('pslot-'+i), src);
+    savePhoto('ep_'+activeEvent+'_'+i, src);
+  });
+}
+
+function restoreEventPhotos(id){
+  Array.from({length:8},(_,i)=>{
+    getPhoto('ep_'+id+'_'+i).then(src=>{
+      if(src) showPhotoInSlot(document.getElementById('pslot-'+i), src);
+    });
+  });
+}
+
+function restoreBuildPhotos(id){
+  Array.from({length:6},(_,i)=>{
+    getPhoto('bp_'+id+'_'+i).then(src=>{
+      if(src) showPhotoInSlot(document.getElementById('bpslot-'+id+'-'+i), src);
+    });
+  });
+}
+
+function restoreCardThumbs(evId, count){
+  Array.from({length:count},(_,i)=>{
+    getPhoto('ep_'+evId+'_'+i).then(src=>{
+      if(!src) return;
+      const slot = document.querySelector('.ev-thumb[data-ev="'+evId+'"][data-i="'+i+'"]');
+      if(slot){
+        let img = slot.querySelector('img');
+        if(!img){img=document.createElement('img');slot.appendChild(img);}
+        img.src = src;
+      }
+    });
+  });
+}
+
+function closeEventModal(){
+  document.getElementById('event-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  activeEvent = null;
+}
+
+function saveEvent(){
+  if(!activeEvent) return;
+  const diffs = Array.from(document.querySelectorAll('.diff-btn.on')).map(b=>b.textContent);
+  S.set('event_'+activeEvent,{
+    score: evScore,
+    thoughts: document.getElementById('em-thoughts').value.trim(),
+    diffs,
+    diffText: document.getElementById('em-diff-text').value.trim(),
+    ga: evGA,
+  });
+  closeEventModal();
+  renderEvents();
+}
+
+// ── PASSIONS ──────────────────────────────────────
+const PASSIONS = [
+  {emoji:'🎸', title:'Heavy Music',
+   body:'Music isn\'t background noise — it\'s the whole atmosphere. Ghost, Metallica, Type O Negative, Sleep Token. The kind of bands where you don\'t just listen, you fall into them completely. Dark, layered, theatrical, heavy. The louder the better.',
+   tags:['Ghost','Metallica','Type O Negative','Sleep Token','Heavy Metal','Doom Metal','Gothic Rock']},
+  {emoji:'🎮', title:'Gaming',
+   body:'Former PlayStation employee, lifelong gamer. I don\'t just play games — I live in them. Deep lore, world-building that takes years to fully understand, and the kind of obsessive playthroughs where you find something new every time. Console and PC, no preference as long as the game earns it.',
+   tags:['PlayStation','Deep Lore','Open World','RPG','Horror','Console','PC Gaming']},
+  {emoji:'🖤', title:'Aesthetic',
+   body:'Gothic. Alt. Emo. Cyberpunk. The dark and the beautiful. I\'ve never been interested in looking like everyone else — aesthetics are a language and mine is spoken in black, neon, leather, and things that go well after midnight. Every outfit is a statement, every space is a mood.',
+   tags:['Gothic','Cyberpunk','Alt','Emo','Dark Fashion','Neon','Black Everything']},
+  {emoji:'🐾', title:'Buddy',
+   body:'Buddy is a Cocker Spaniel and the most chaotic, loving, unhinged creature I\'ve ever met. He operates entirely on vibes, has zero concept of personal space, and is completely convinced he\'s the main character. He is correct. Certified good boy. Absolutely irreplaceable.',
+   tags:['Cocker Spaniel','Good Boy','Chaos Agent','Best Dog','Professional Menace']},
+  {emoji:'🇫🇮', title:'Finland',
+   body:'I\'ve been and I need to go back. There\'s something about Finland that just fits — the quietness, the darkness in winter, the complete lack of pressure to be sociable. The forests, the saunas, the heavy music scene. It\'s the only place I\'ve been where I immediately thought: I could actually live here.',
+   tags:['Helsinki','Finnish Nature','Winter Dark','Sauna Culture','Heavy Music Scene','Would Live There']},
+  {emoji:'💿', title:'Deep Dives',
+   body:'Give me a topic I care about and I will spend three days going absolutely feral on it. Music discographies, band lore, game history, niche tech rabbit holes at 3am. I don\'t do surface level. I don\'t skim. I read everything, watch everything, and emerge knowing more than is probably reasonable.',
+   tags:['3am Rabbit Holes','Lore Videos','Deep Research','Obsessive Learning','Never Just Casual']},
+  {emoji:'🏠', title:'Indoor Life',
+   body:'I am not outdoorsy and I\'m at peace with that. My ideal environment is a carefully curated space — dark, cosy, everything exactly where it should be. Good lighting (low), good playlist (loud), good snacks (obviously). The outside world is fine in small doses. My setup is always better.',
+   tags:['Proud Homebody','Cosy Spaces','Perfect Setup','Good Snacks','Hermit Behaviour']},
+  {emoji:'🌙', title:'Night Mode',
+   body:'Everything is better after dark. My brain works better, my energy is higher, my best conversations happen after midnight. I\'ve accepted that I\'m just not a morning person and I\'ve stopped apologising for it. Night is when the good stuff happens — the building, the thinking, the music, all of it.',
+   tags:['Night Owl','Best After Midnight','Deep Conversations','Always Online','Morning? No.']},
+];
+
+function openPassion(i){
+  const p = PASSIONS[i];
+  document.getElementById('pp-emoji').textContent = p.emoji;
+  document.getElementById('pp-title').textContent = p.title;
+  document.getElementById('pp-body').textContent = p.body;
+  document.getElementById('pp-tags').innerHTML = p.tags.map(t=>`<span class="tag tc">${t}</span>`).join('');
+  document.getElementById('passion-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePassion(){
+  document.getElementById('passion-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── ADD EVENT MODAL ───────────────────────────────
+let addEventTab = 'upcoming';
+let addEventType = 'Festival';
+
+function openAddEvent(tab){
+  addEventTab = tab;
+  addEventType = 'Festival';
+  document.getElementById('aem-title').textContent = tab==='upcoming' ? 'Add Upcoming Event' : 'Add Past Event';
+  document.getElementById('aem-name').value = '';
+  document.getElementById('aem-venue').value = '';
+  document.getElementById('aem-date').value = '';
+  document.querySelectorAll('.type-btn').forEach(b=>{
+    b.classList.toggle('on', b.textContent==='Festival');
+  });
+  document.getElementById('add-event-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAddEvent(){
+  document.getElementById('add-event-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function setType(btn, type){
+  addEventType = type;
+  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+function saveNewEvent(){
+  const name = document.getElementById('aem-name').value.trim();
+  const venue = document.getElementById('aem-venue').value.trim();
+  const date = document.getElementById('aem-date').value.trim();
+  if(!name) return;
+  const id = 'custom_'+Date.now();
+  const ev = {id, name, venue:venue||'TBC', date:date||'TBC', badge:addEventType};
+  const customs = getCustomEvents(addEventTab);
+  customs.push(ev);
+  saveCustomEvents(addEventTab, customs);
+  closeAddEvent();
+  renderEvents();
+  document.querySelector(`.ev-tab[data-tab="${addEventTab}"]`).click();
+}
+
+// ── TABS ──────────────────────────────────────────
+document.querySelectorAll('.ev-tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.ev-tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.ev-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ── DATA SORT GAME ─────────────────────────────────
+const GAME_MSGS=[
+  "JELLYFIN SERVER STABLE. CONTINUE PURGING.",
+  "BUDDY HAS ENTERED THE ROOM. MAINTAIN FOCUS.",
+  "GHOST PLAYLIST ACTIVE. EFFICIENCY +40%.",
+  "CYBERDECK ONLINE. DATA ROUTING NOMINAL.",
+  "ANOMALY DETECTED. ANOMALY PURGED. CARRY ON.",
+  "CORRUPTION SPREADING. SORT FASTER.",
+  "THIS IS FINE.",
+  "ERROR: MOTIVATION NOT FOUND. PROCEEDING ANYWAY.",
+  "DOWNLOAD 2026 INCOMING. STAY FOCUSED.",
+  "BREACH IN SECTOR 7. YOU'VE GOT THIS.",
+  "BUDDY IS JUDGING YOUR PERFORMANCE.",
+  "METALLICA PROTOCOL ENGAGED.",
+  "THREAT ESCALATING. COPE.",
+  "SLEEP TOKEN DETECTED IN AUDIO FEED. ACCEPTABLE.",
+  "YOU ARE BUILT FOR THIS. OBVIOUSLY.",
+  "LIVERPOOL MAINFRAME HOLDING STEADY.",
+  "TYPE O NEGATIVE SUBROUTINE LOADED.",
+  "THE CYBERDECK HUNGERS FOR MORE DATA.",
+  "GHOST // CIRICE.MP3 — QUEUED.",
+  "PACKET LOSS: 0%. IMPRESSIVE.",
+  "BUDDY HAS KNOCKED SOMETHING OFF THE DESK.",
+  "FINLAND NODE: STILL DREAMING.",
+  "ERROR 666: TOO MUCH CHAOS. PURGE IT.",
+  "YOU'RE DOING GREAT. OBVIOUSLY.",
+  "THE NETWORK DOESN'T STAND A CHANCE.",
+  "OBSESSIVE ATTENTION TO DETAIL: ENGAGED.",
+  "VIP ACCESS DETECTED. ELEVATED PRIVILEGES GRANTED.",
+  "CONCERT WRISTBAND ANOMALY. PURGING.",
+];
+const THREAT_LEVELS=['STANDBY','LOW','MEDIUM','HIGH','CRITICAL','MAXIMUM','UNHINGED'];
+const ROWS=7,COLS=14;
+let tgCells=[],tgActive=new Set(),tgSorted=0,tgBinCounts=[0,0,0,0];
+let tgSpeed=3000,tgThreat=1,tgActInterval=null,tgMsgInterval=null,tgShuffleInterval=null,tgMsgIdx=0,tgStarted=false;
+
+function tgInitGrid(){
+  const grid=document.getElementById('tg-grid');
+  if(!grid||tgCells.length>0) return;
+  for(let i=0;i<ROWS*COLS;i++){
+    const c=document.createElement('div');
+    c.className='tg-cell';
+    c.textContent=Math.floor(Math.random()*10);
+    c.addEventListener('click',()=>tgClickCell(i));
+    grid.appendChild(c);
+    tgCells.push(c);
+  }
+}
+
+function startGame(){
+  if(tgStarted) return;
+  tgStarted=true;
+  const overlay=document.getElementById('tg-overlay');
+  if(overlay){overlay.style.transition='opacity .5s';overlay.style.opacity='0';setTimeout(()=>overlay.remove(),500);}
+  document.getElementById('tg-speed').textContent=THREAT_LEVELS[tgThreat];
+  tgShowMsg('BREACH ACTIVE. PURGE THE CORRUPTED PACKETS.');
+  tgActInterval=setInterval(tgActivate,tgSpeed);
+  tgMsgInterval=setInterval(tgNextMsg,5000);
+  tgShuffleInterval=setInterval(()=>{
+    tgCells.forEach((c,i)=>{if(!tgActive.has(i))c.textContent=Math.floor(Math.random()*10);});
+  },850);
+}
+
+function tgActivate(){
+  const avail=tgCells.map((_,i)=>i).filter(i=>!tgActive.has(i));
+  tgShuffle(avail).slice(0,2+Math.floor(Math.random()*2)).forEach(i=>{
+    tgActive.add(i);
+    tgCells[i].classList.add('active');
+    setTimeout(()=>{
+      if(!tgActive.has(i)) return;
+      tgActive.delete(i);
+      tgCells[i].classList.remove('active');
+      tgCells[i].classList.add('missed');
+      setTimeout(()=>tgCells[i].classList.remove('missed'),400);
+    },3500);
+  });
+}
+
+function tgClickCell(i){
+  if(!tgActive.has(i)||!tgStarted) return;
+  tgActive.delete(i);
+  tgCells[i].classList.remove('active');
+  tgCells[i].classList.add('sorted');
+  setTimeout(()=>{tgCells[i].classList.remove('sorted');tgCells[i].textContent=Math.floor(Math.random()*10);},260);
+  const b=Math.floor(Math.random()*4);
+  tgBinCounts[b]++;
+  tgSorted++;
+  document.getElementById('tg-score').textContent=tgSorted;
+  document.getElementById('tg-bc-'+b).textContent=tgBinCounts[b];
+  const mx=Math.max(...tgBinCounts);
+  tgBinCounts.forEach((_,j)=>{document.getElementById('tg-bf-'+j).style.width=mx>0?(tgBinCounts[j]/mx*100)+'%':'0%';});
+  if(tgSorted%30===0&&tgSpeed>1400){
+    tgSpeed=Math.max(1400,tgSpeed-200);
+    tgThreat=Math.min(tgThreat+1,THREAT_LEVELS.length-1);
+    document.getElementById('tg-speed').textContent=THREAT_LEVELS[tgThreat];
+    clearInterval(tgActInterval);
+    tgActInterval=setInterval(tgActivate,tgSpeed);
+    tgShowMsg('THREAT ESCALATING. ADAPT OR THE NETWORK FALLS.');
+  }
+}
+
+function tgShuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function tgNextMsg(){tgShowMsg(GAME_MSGS[tgMsgIdx++%GAME_MSGS.length]);}
+function tgShowMsg(msg){
+  const el=document.getElementById('tg-msg');
+  if(!el)return;
+  el.style.opacity='0';
+  setTimeout(()=>{el.textContent=msg;el.style.opacity='1';},300);
+}
+
+tgInitGrid();
+
+// ── REVEAL + NAV ──────────────────────────────────
+function observeReveal(){
+  const obs = new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:.1});
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
+}
+
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)cur=s.id;});
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+
+// ── MODAL CLOSE ───────────────────────────────────
+document.getElementById('build-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeBuildModal();});
+document.getElementById('event-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeEventModal();});
+document.getElementById('add-event-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeAddEvent();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeBuildModal();closeEventModal();closeAddEvent();closePassion();}});
+
+// ── INIT ──────────────────────────────────────────
+renderBuilds();
+renderEvents();
+observeReveal();
+</script>
+</body>
+</html>
